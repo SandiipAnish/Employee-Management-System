@@ -16,14 +16,17 @@ export default function EmployeeForm() {
 
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setSuccessMessage(null);
     
     try {
       const result = await addEmployeeApi(formData);
       console.log('Employee added:', result);
+      setSuccessMessage('Employee added successfully!');
       setFormData(initialState);
     } catch (error) {
       console.error('Error:', error);
@@ -39,12 +42,23 @@ export default function EmployeeForm() {
     }));
   };
 
+  const handleReset = () => {
+    setFormData(initialState);
+    setError(null);
+    setSuccessMessage(null);
+  };
+
   return (
     <div className="form-container">
       <h1 className="form-title">Employee Registration</h1>
       {error && (
         <div className="error-message" style={{ color: 'red', marginBottom: '15px' }}>
           {error}
+        </div>
+      )}
+      {successMessage && (
+        <div className="success-message" style={{ color: 'green', marginBottom: '15px' }}>
+          {successMessage}
         </div>
       )}
       <form onSubmit={handleSubmit}>
@@ -147,7 +161,24 @@ export default function EmployeeForm() {
           </select>
         </div>
 
-        <button type="submit" className="submit-button">Submit</button>
+        <div className="button-container" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+          <button type="submit" className="submit-button">Submit</button>
+          <button 
+            type="button" 
+            onClick={handleReset} 
+            className="reset-button"
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#6c757d',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </form>
     </div>
   );

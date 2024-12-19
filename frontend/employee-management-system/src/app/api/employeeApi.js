@@ -1,42 +1,4 @@
-// export const addEmployeeApi = async (employeeData) => {
-//   try {
-//     const response = await fetch('http://localhost:5000/api/employees/add', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(employeeData)
-//     });
-
-//     // Parse the response text first, as the error might be in text format
-//     const responseText = await response.text();
-
-//     // Check if the response is not OK
-//     if (!response.ok) {
-//       // Try to parse the error as JSON, but fall back to the text if it's not valid JSON
-//       let errorMessage = 'Failed to add employee';
-//       try {
-//         const errorData = JSON.parse(responseText);
-//         errorMessage = errorData.message || errorMessage;
-//       } catch {
-//         errorMessage = responseText || errorMessage;
-//       }
-
-//       // Throw an error with the parsed message
-//       throw new Error(errorMessage);
-//     }
-
-//     // If response is OK, parse and return the JSON
-//     return JSON.parse(responseText);
-//   } catch (error) {
-//     console.error('Error in addEmployeeApi:', error);
-    
-//     // Re-throw the error with a more informative message
-//     throw new Error(`API Error: ${error.message}`);
-//   }
-// }
-
-
+// Function to add an employee
 export const addEmployeeApi = async (employeeData) => {
   try {
     // Ensure phone is a string of digits
@@ -83,8 +45,23 @@ export const addEmployeeApi = async (employeeData) => {
     return parsedResponse;
   } catch (error) {
     console.error('Error in addEmployeeApi:', error);
-    
-    // Re-throw the error with a more informative message
     throw new Error(`API Error: ${error.message}`);
   }
-}
+};
+
+// Function to get all employees
+export const getAllEmployeesApi = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/api/employees/all');
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to fetch employees');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching employees:', error);
+    throw new Error(`Failed to fetch employees: ${error.message}`);
+  }
+};

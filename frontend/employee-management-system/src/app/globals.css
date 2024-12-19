@@ -88,3 +88,84 @@ body {
       padding: 1rem;
     }
   }
+
+  .button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .submit-button,
+  .reset-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .reset-button {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .reset-button:hover {
+    background-color: #5a6268;
+  }
+  
+  .submit-button:disabled,
+  .reset-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any custom styles here */
+.form-container {
+  @apply max-w-2xl mx-auto p-6;
+}
+
+.form-title {
+  @apply text-2xl font-bold mb-6 text-center;
+}
+
+.form-field {
+  @apply mb-4;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+.form-input {
+  @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.form-select {
+  @apply bg-white;
+}
+
+.submit-button {
+  @apply w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4;
+}
+
+.error-message {
+  @apply text-red-500 text-sm mb-4;
+}
+
+.success-message {
+  @apply text-green-500 text-sm mb-4;
+}
